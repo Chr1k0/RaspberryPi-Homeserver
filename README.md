@@ -1,1 +1,1 @@
-![Documentation Link](https://raw.githubusercontent.com/Chr1k0/RaspberryPi-HomeServer/main/documentation/documentation.md)
+![Documentation Link](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/documentation)
