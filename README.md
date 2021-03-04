@@ -4,7 +4,7 @@
 
 This documentation explains how to setup your Raspberry Pi with Docker and run [Traefik](https://traefik.io/traefik/), [PiHole](https://pi-hole.net), [Portainer](https://www.portainer.io),  [Nextcloud](https://nextcloud.com) and [Bitwarden](https://bitwarden.com) within your local network using local (sub)domains and TLS encryption (HTTPS). To access the services from outside the local network a private network connection (VPN) can be used. 
 
-![Hardware Image](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/hardware_image.png?raw=true)
+![Hardware Image](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/hardware_image.png?raw=true)
 
 ## Table of contents
 
@@ -45,27 +45,27 @@ This documentation explains how to setup your Raspberry Pi with Docker and run [
 
 - Flash an image to your microSD card. 
     >https://www.raspberrypi.org/software/  
-    >![Flash Image](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/flash_image_1.png?raw=true)
+    >![Flash Image](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/flash_image_1.png?raw=true)
 
 - Enable SSH on your Raspberry Pi. Reconnect the flashed microSD card and place a file called "ssh" without extension and content at the root directory of the card. 
     >https://www.raspberrypi.org/documentation/remote-access/ssh/  
-    >![Enable SSH](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/flash_image_2.png?raw=true)
+    >![Enable SSH](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/flash_image_2.png?raw=true)
 
 - Establish a LAN connection and plug in the power supply to boot your system. 
     >**Note**: default login credentials are - username "pi", password "raspberry".
 
 - Get the IP address of your Raspberry Pi from your router.
-    >![Raspberry Pi IP](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_ip_1.png?raw=true)  
+    >![Raspberry Pi IP](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_ip_1.png?raw=true)  
     
 - Set IP address to be static or define a custom static address.
-    >![Raspberry Pi IP](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_ip_2.png?raw=true)
+    >![Raspberry Pi IP](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_ip_2.png?raw=true)
 
 - Restart your router to apply the settings.    
-    >![Raspberry Pi IP](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_settings_3.png?raw=true)
+    >![Raspberry Pi IP](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_settings_3.png?raw=true)
     
 - Establish a SSH connection.  
     >https://www.raspberrypi.org/documentation/remote-access/ssh/  
-    >![Connect SSH](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/connect_ssh.png?raw=true)
+    >![Connect SSH](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/connect_ssh.png?raw=true)
     
 - **Optional**, but recommended to avoid boot up alters in the future: 
     - Change the default password.
@@ -122,7 +122,7 @@ Install the necessary software packages on your system to setup your home server
     >mkdir /home/pi/homeserver
 
 - Download the preconfigured Docker-Compose files.
-    >git clone https://github.com/Chr1k0/RaspberryPi-Homeserver.git /home/pi/homeserver
+    >git clone https://github.com/Chr1k0/RaspberryPi-HomeServer.git /home/pi/homeserver
 
 # Install Docker services
 
@@ -142,7 +142,7 @@ Install and  launch the docker services on your system to setup your home server
     >sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout raspberrypi.local.key -out raspberrypi.local.crt
 
     >**Note**: You don't have (but are free) to specify any custom entries, except the second last "Common Name". Here you configure the local domain under which you like your services to be accessible later. For example: *.raspberrypi.local  
-    >![SSL Certificate](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/ssl_certificate.png?raw=true)
+    >![SSL Certificate](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/ssl_certificate.png?raw=true)
 
 - Move the created certificate files to the Traefik docker volume.   
     >sudo mv raspberrypi.local.key /var/lib/docker/volumes/traefik/_data/certs/raspberrypi.local.key  
@@ -226,13 +226,13 @@ Install and  launch the docker services on your system to setup your home server
 To complete the setup process you now need to configure your router to make the services accessible.
 
 - Update the DNS server. Set the DNS server IP address to the one of your Raspberry Pi (chapter [Prepare the setup process](#prepare-the-setup-process)).
-    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_settings_1.png?raw=true)
+    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_settings_1.png?raw=true)
 
 - Disable the DNS Rebind Protection (maybe not necessary depending on the router) for the domains specified (chapter [Install PiHole](#install-pihole)).
-    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_settings_2.png?raw=true)
+    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_settings_2.png?raw=true)
 
 - Restart your router to apply the settings.
-    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_settings_3.png?raw=true)
+    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_settings_3.png?raw=true)
     
 - All services should now be reachable. You can start to use and configure them.
     >https://traefik.raspberrypi.local  
@@ -291,10 +291,10 @@ If you like to test the performance of your microSD card or USB device running t
 # Update the system
 
 - Update the DNS server. Temporarily set a different (valid) DNS server IP address than the one of your Raspberry Pi.
-    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_settings_4.png?raw=true)
+    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_settings_4.png?raw=true)
 
 - Restart your router to apply the settings.
-    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_settings_3.png?raw=true)
+    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_settings_3.png?raw=true)
 
 - Update the system.
     >sudo apt update && sudo apt upgrade -y   
@@ -328,9 +328,9 @@ If you like to test the performance of your microSD card or USB device running t
     >sudo docker-compose -p bitwarden -f /home/pi/homeserver/docker/docker-compose.bitwarden.yml up -d  
 
 - Update the DNS server. Set the DNS server IP address back to the one of your Raspberry Pi (chapter [Prepare the setup process](#prepare-the-setup-process)).
-    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_settings_1.png?raw=true)
+    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_settings_1.png?raw=true)
 
 - Restart your router to apply the settings.
-    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-Homeserver/blob/main/images/router_settings_3.png?raw=true)
+    >![Router DNS Setting](https://github.com/Chr1k0/RaspberryPi-HomeServer/blob/main/documentation/images/router_settings_3.png?raw=true)
 
 # Known problems
