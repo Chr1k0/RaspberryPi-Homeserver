@@ -28,6 +28,7 @@ services:
 
       - "traefik.udp.routers.dnsudp.entrypoints=dnsudp"
       - "traefik.udp.services.pihole.loadbalancer.server.port=53"
+      - "traefik.udp.services.pihole.loadbalancer.passHostHeader=true"
 
 volumes:
   pihole:
