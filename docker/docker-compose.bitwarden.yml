@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  bitwarden:
+    container_name: bitwarden
+    image: bitwardenrs/server
+    restart: always
+    networks:
+      - local
+    volumes:
+      - "/var/lib/docker/volumes/bitwarden/_data/data/:/data/"
+      - "/var/lib/docker/volumes/bitwarden/_data/config/:/config/"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bitwarden.entrypoints=https"
+      - "traefik.http.routers.bitwarden.tls=true"
+      - "traefik.http.routers.bitwarden.rule=Host(`bitwarden.raspberrypi.local`)"
+      - "traefik.http.services.bitwarden.loadbalancer.server.port=80"
+
+volumes:
+  bitwarden:
+    name: bitwarden
+
+networks:
+  local:
+    name: local

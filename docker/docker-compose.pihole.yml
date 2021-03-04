@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+
+  pihole:
+    container_name: pihole
+    image: pihole/pihole
+    restart: always
+    networks:
+      - local
+    environment:
+      TZ: "Europe/Berlin"
+    volumes:
+      - "/var/lib/docker/volumes/pihole/_data/etc-pihole/:/etc/pihole/"
+      - "/var/lib/docker/volumes/pihole/_data/etc-dnsmasq.d/:/etc/dnsmasq.d/"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pihole.entrypoints=https"
+      - "traefik.http.routers.pihole.tls=true"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.raspberrypi.local`)"
+      - "traefik.http.routers.pihole.middlewares=pihole-prefix"
+      - "traefik.http.middlewares.pihole-prefix.addPrefix.prefix=/admin"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+      
+      - "traefik.tcp.routers.dnstcp.entrypoints=dnstcp"
+      - "traefik.tcp.routers.dnstcp.rule=HostSNI(`*`)"
+      - "traefik.tcp.services.pihole.loadbalancer.server.port=53"
+
+      - "traefik.udp.routers.dnsudp.entrypoints=dnsudp"
+      - "traefik.udp.services.pihole.loadbalancer.server.port=53"
+
+volumes:
+  pihole:
+    name: pihole
+    
+networks:
+  local:
+    name: local

@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce
+    restart: always
+    networks:
+      - local
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer:/data/"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.entrypoints=https"
+      - "traefik.http.routers.portainer.tls=true"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.raspberrypi.local`)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+
+volumes:
+  portainer:
+    name: portainer
+
+networks:
+  local:
+    name: local
