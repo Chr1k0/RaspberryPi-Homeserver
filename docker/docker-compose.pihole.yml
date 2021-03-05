@@ -21,14 +21,14 @@ services:
       - "traefik.http.routers.pihole.middlewares=pihole-prefix"
       - "traefik.http.middlewares.pihole-prefix.addPrefix.prefix=/admin"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
-      
+      - "traefik.http.services.pihole.loadbalancer.passHostHeader=true"
+
       - "traefik.tcp.routers.dnstcp.entrypoints=dnstcp"
       - "traefik.tcp.routers.dnstcp.rule=HostSNI(`*`)"
       - "traefik.tcp.services.pihole.loadbalancer.server.port=53"
 
       - "traefik.udp.routers.dnsudp.entrypoints=dnsudp"
       - "traefik.udp.services.pihole.loadbalancer.server.port=53"
-      - "traefik.udp.services.pihole.loadbalancer.passHostHeader=true"
 
 volumes:
   pihole:
